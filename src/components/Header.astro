@@ -1,0 +1,73 @@
+---
+const links = [
+  { name: 'Home', href: '/' },
+  { name: 'Consulting', href: '#consulting' },
+  { name: 'Courses', href: '#courses' },
+  { name: 'About Us', href: '#about' },
+  { name: 'Contact', href: '#contact' },
+];
+---
+<header class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-white/10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex-shrink-0 flex items-center gap-2">
+        <!-- Logo placeholder -->
+        <div class="w-8 h-8 rounded bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center">
+          <span class="text-white font-bold text-xl leading-none">R</span>
+        </div>
+        <span class="text-white font-bold text-xl tracking-wide">Raytron Future</span>
+      </div>
+      
+      <!-- Desktop Menu -->
+      <nav class="hidden md:block" aria-label="Global">
+        <ul class="flex space-x-8">
+          {links.map(link => (
+            <li>
+              <a 
+                href={link.href} 
+                class="text-slate-300 hover:text-cyan-400 transition-colors text-sm font-medium tracking-wide"
+              >
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden flex items-center">
+        <button type="button" class="text-slate-300 hover:text-white p-2" aria-controls="mobile-menu" aria-expanded="false" id="mobile-menu-btn">
+          <span class="sr-only">Open main menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="hidden md:hidden bg-slate-900 border-b border-white/10" id="mobile-menu">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      {links.map(link => (
+        <a 
+          href={link.href} 
+          class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition-colors"
+        >
+          {link.name}
+        </a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  
+  btn?.addEventListener('click', () => {
+    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', (!isExpanded).toString());
+    menu?.classList.toggle('hidden');
+  });
+</script>
